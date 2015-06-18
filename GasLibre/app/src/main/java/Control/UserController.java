@@ -14,8 +14,9 @@ import Model.User;
 public class UserController {
 
     private Context context;
-    public static User userNaSessao= null;
+    public  User userNaSessao= null;
     UserDAO userDao;
+    private SessionManager sessionManager;
 
     public UserController() {
     }
@@ -23,6 +24,7 @@ public class UserController {
     public UserController(Context context) {
         this.context = context;
         this.userDao= new UserDAO(context);
+        this.sessionManager = new SessionManager(this.context);
     }
 
     public boolean autenticaUsuario( String email, String senha ){
@@ -40,6 +42,7 @@ public class UserController {
     }
 
     public boolean estaLogadoNaSessao() {
+        userNaSessao = this.sessionManager.isLoggedIn();
         if(userNaSessao == null){
             return false;
         }else{
