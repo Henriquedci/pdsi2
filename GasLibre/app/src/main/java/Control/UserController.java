@@ -42,12 +42,8 @@ public class UserController {
     }
 
     public boolean estaLogadoNaSessao() {
-        userNaSessao = this.sessionManager.isLoggedIn();
-        if(userNaSessao == null){
-            return false;
-        }else{
-            return true;
-        }
+        boolean usuarioLogadoNaSessao = this.sessionManager.isLoggedIn();
+        return usuarioLogadoNaSessao;
     }
 
     public void colocaUsuarioNaSessao(User user){
